@@ -5,15 +5,21 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
 
 import com.example.appdoctruyentranh.adapter.TruyenTranhAdapter;
+import com.example.appdoctruyentranh.api.ApiLayTruyen;
+import com.example.appdoctruyentranh.interfaces.LayTruyenVe;
 import com.example.appdoctruyentranh.object.TruyenTranh;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends ComponentActivity {
+public class MainActivity extends ComponentActivity implements LayTruyenVe {
     GridView gdvDSTruyen;
     TruyenTranhAdapter adapter;
     ArrayList<TruyenTranh> truyenTranhArrayList;
@@ -27,22 +33,24 @@ public class MainActivity extends ComponentActivity {
         anhXa();
         setUp();
         setClick();
+        new ApiLayTruyen(this).execute();
     }
 
     private void init () {
         truyenTranhArrayList = new ArrayList<>();
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Được Các Anh Trai Chiều Chuộng Tôi Trở Nên Ngang Tàng", " Chương 253 ", "https://cdnntx.com/nettruyen/thumb/duoc-cac-anh-trai-chieu-chuong-toi-tro-nen-ngang-tang.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Captain Tsubasa", " Chapter 27 ", "https://cdnntx.com/nettruyen/thumb/captain-tsubasa.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Ngạ Quỷ Tokyo", " Chapter 66 ", "https://cdnntx.com/nettruyen/thumb/nga-quy-tokyo.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Blame!", " Chapter 30 ", "https://cdnntx.com/nettruyen/thumb/blame.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Được Các Anh Trai Chiều Chuộng Tôi Trở Nên Ngang Tàng", " Chương 253 ", "https://cdnntx.com/nettruyen/thumb/duoc-cac-anh-trai-chieu-chuong-toi-tro-nen-ngang-tang.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Captain Tsubasa", " Chapter 27 ", "https://cdnntx.com/nettruyen/thumb/captain-tsubasa.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Ngạ Quỷ Tokyo", " Chapter 66 ", "https://cdnntx.com/nettruyen/thumb/nga-quy-tokyo.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Blame!", " Chapter 30 ", "https://cdnntx.com/nettruyen/thumb/blame.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Được Các Anh Trai Chiều Chuộng Tôi Trở Nên Ngang Tàng", " Chương 253 ", "https://cdnntx.com/nettruyen/thumb/duoc-cac-anh-trai-chieu-chuong-toi-tro-nen-ngang-tang.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Captain Tsubasa", " Chapter 27 ", "https://cdnntx.com/nettruyen/thumb/captain-tsubasa.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Ngạ Quỷ Tokyo", " Chapter 66 ", "https://cdnntx.com/nettruyen/thumb/nga-quy-tokyo.jpg"));
-        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Blame!", " Chapter 30 ", "https://cdnntx.com/nettruyen/thumb/blame.jpg"));
+
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Được Các Anh Trai Chiều Chuộng Tôi Trở Nên Ngang Tàng", " Chương 253 ", "https://cdnntx.com/nettruyen/thumb/duoc-cac-anh-trai-chieu-chuong-toi-tro-nen-ngang-tang.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Captain Tsubasa", " Chapter 27 ", "https://cdnntx.com/nettruyen/thumb/captain-tsubasa.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Ngạ Quỷ Tokyo", " Chapter 66 ", "https://cdnntx.com/nettruyen/thumb/nga-quy-tokyo.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Blame!", " Chapter 30 ", "https://cdnntx.com/nettruyen/thumb/blame.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Được Các Anh Trai Chiều Chuộng Tôi Trở Nên Ngang Tàng", " Chương 253 ", "https://cdnntx.com/nettruyen/thumb/duoc-cac-anh-trai-chieu-chuong-toi-tro-nen-ngang-tang.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Captain Tsubasa", " Chapter 27 ", "https://cdnntx.com/nettruyen/thumb/captain-tsubasa.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Ngạ Quỷ Tokyo", " Chapter 66 ", "https://cdnntx.com/nettruyen/thumb/nga-quy-tokyo.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Blame!", " Chapter 30 ", "https://cdnntx.com/nettruyen/thumb/blame.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Được Các Anh Trai Chiều Chuộng Tôi Trở Nên Ngang Tàng", " Chương 253 ", "https://cdnntx.com/nettruyen/thumb/duoc-cac-anh-trai-chieu-chuong-toi-tro-nen-ngang-tang.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Captain Tsubasa", " Chapter 27 ", "https://cdnntx.com/nettruyen/thumb/captain-tsubasa.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Ngạ Quỷ Tokyo", " Chapter 66 ", "https://cdnntx.com/nettruyen/thumb/nga-quy-tokyo.jpg"));
+//        truyenTranhArrayList.add(new TruyenTranh("Truyện tranh Blame!", " Chapter 30 ", "https://cdnntx.com/nettruyen/thumb/blame.jpg"));
 
         adapter = new TruyenTranhAdapter(this, 0, truyenTranhArrayList);
     }
@@ -71,5 +79,31 @@ public class MainActivity extends ComponentActivity {
                 adapter.sortTruyen(s);
             }
         });
+    }
+
+    @Override
+    public void batDau() {
+        Toast.makeText(this, "Đang lấy về", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void ketThuc(String data) {
+        try {
+            truyenTranhArrayList.clear();
+            JSONArray arr = new JSONArray(data);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+                truyenTranhArrayList.add(new TruyenTranh(o));
+            }
+            adapter = new TruyenTranhAdapter(this, 0, truyenTranhArrayList);
+            gdvDSTruyen.setAdapter(adapter);
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void biLoi() {
+        Toast.makeText(this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
     }
 }

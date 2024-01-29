@@ -1,9 +1,27 @@
 package com.example.appdoctruyentranh.object;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TruyenTranh {
     private String tenTruyen;
     private String tenChap;
     private String linkAnh;
+
+    /*
+    * {
+    * "tenTruyen": "",
+    * "tenChap": "",
+    * "linkAnh": ""
+    * }
+    * */
+    public TruyenTranh() {
+    }
+    public TruyenTranh(JSONObject o) throws JSONException {
+        this.tenTruyen = o.getString("tenTruyen");
+        this.tenChap = o.getString("tenChap");
+        this.linkAnh = o.getString("linkAnh");
+    }
 
     public TruyenTranh(String tenTruyen, String tenChap, String linkAnh) {
         this.tenTruyen = tenTruyen;
