@@ -25,6 +25,20 @@ public class TruyenTranhAdapter extends ArrayAdapter<TruyenTranh> {
         this.arr = new ArrayList<>(objects);
     }
 
+    public void sortTruyen (String s) {
+        s = s.toLowerCase();
+        int k = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            TruyenTranh t = arr.get(i);
+            String ten = t.getTenTruyen().toUpperCase();
+            if (ten.indexOf(s) >= 0) {
+                arr.set(i, arr.get(k));
+                arr.set(k, t);
+                k++;
+            }
+        }
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

@@ -1,6 +1,9 @@
 package com.example.appdoctruyentranh;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import androidx.activity.ComponentActivity;
@@ -14,6 +17,7 @@ public class MainActivity extends ComponentActivity {
     GridView gdvDSTruyen;
     TruyenTranhAdapter adapter;
     ArrayList<TruyenTranh> truyenTranhArrayList;
+    EditText edtTimKiem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +48,28 @@ public class MainActivity extends ComponentActivity {
     }
     private void anhXa () {
         gdvDSTruyen = findViewById(R.id.gdvDSTruyen);
+        edtTimKiem = findViewById(R.id.edtTimKiem);
     }
     private void setUp () {
         gdvDSTruyen.setAdapter(adapter);
     }
-    private void setClick () {}
+    private void setClick () {
+        edtTimKiem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = edtTimKiem.getText().toString();
+                adapter.sortTruyen(s);
+            }
+        });
+    }
 }
